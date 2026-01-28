@@ -5,12 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>hola mira esta cosa rapido niko oh si niko mueve ese gyatt yeaaaah</title>
     <style>
+        @keyframes brillo {
+            0%, 100% { text-shadow: 0 0 10px rgba(255, 20, 147, 0.5); }
+            50% { text-shadow: 0 0 20px rgba(255, 20, 147, 0.8); }
+        }
+
         body {
-            background-color: #72429e; 
+            background-color: #ff0000; 
             font-family: monospace; 
             text-align: center;
             padding: 20px;
             cursor: help;
+            position: relative;
+            overflow-x: hidden;
         }
 
         .container {
@@ -19,20 +26,28 @@
             border: 5px dashed black; 
             box-shadow: 15px 15px 0px black;
             max-width: 400px;
-            margin: 50px auto; 
+            margin: 50px auto;
+            position: relative;
+            z-index: 10;
         }
 
         h1 {
             color: black;
             text-decoration: underline;
             font-size: 2em;
-            transform: rotate(-2deg); 
+            transform: rotate(-2deg);
+            animation: brillo 2s infinite;
         }
 
         img {
             width: 200px;
             height: auto;
-            border: 3px solid black; 
+            border: 3px solid black;
+            transition: transform 0.3s;
+        }
+
+        img:hover {
+            transform: scale(1.05);
         }
 
         .buttons {
@@ -50,18 +65,22 @@
             cursor: pointer;
             border: 4px solid black;
             border-radius: 0px !important; 
-            transition: none; 
+            transition: all 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
         }
 
         #yesBtn {
-            background-color: rgb(250, 134, 183);
-            color: rgb(130, 74, 163);
+            background-color: rgb(134, 217, 250);
+            color: rgb(59, 67, 168);
             font-size: 24px; 
         }
 
         #yesBtn:active {
             background-color: black;
-            color: rgb(234, 0, 255);
+            color: rgb(0, 255, 0);
         }
 
         #noBtn {
@@ -73,6 +92,12 @@
         #subtexto {
             font-size: 1.2em;
         }
+
+        #musicContainer {
+            display: none;
+            margin-top: 50px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -80,19 +105,56 @@
     <div class="container">
         <img id="gif" src="https://i.pinimg.com/originals/b9/47/96/b947963868603abcfa888e6581e97fe2.gif" alt="Hello Kitty Emo">
         
-        <h1 id="pregunta">umh ola nikulin  linda bonita y jot quieres ser mi san valentin???</h1>
+        <h1 id="pregunta">umh quieres ser mi san valentin bebita bonita??</h1>
         
         <p id="subtexto">(jijijija)</p>
         
         <div class="buttons">
-            <button id="yesBtn" class="btn" onclick="aceptar()">[ SÍ OVIAMNTE ]</button>
+            <button id="yesBtn" class="btn" onclick="aceptar()">[ SÍ, OVIAMNTE ]</button>
             <button id="noBtn" class="btn" onmouseover="moverBoton()" onclick="touchStart()">[ No ]</button>
         </div>
     </div>
 
     <script>
-         function touchStart() {
-             moverBoton();
+        // Función para confeti al aceptar
+        function crearConfeti() {
+            const colores = ['#ff1493', '#ff69b4', '#ffb6c1', '#ffc0cb', '#ff0000'];
+            for (let i = 0; i < 50; i++) {
+                const confeti = document.createElement('div');
+                confeti.style.position = 'fixed';
+                confeti.style.width = (Math.random() * 10 + 5) + 'px';
+                confeti.style.height = (Math.random() * 10 + 5) + 'px';
+                confeti.style.backgroundColor = colores[Math.floor(Math.random() * colores.length)];
+                confeti.style.left = Math.random() * window.innerWidth + 'px';
+                confeti.style.top = '-10px';
+                confeti.style.borderRadius = '50%';
+                confeti.style.pointerEvents = 'none';
+                confeti.style.zIndex = 999;
+                
+                const velocidadX = (Math.random() - 0.5) * 8;
+                const velocidadY = Math.random() * 4 + 4;
+                let x = parseFloat(confeti.style.left);
+                let y = 0;
+                
+                const animarConfeti = setInterval(() => {
+                    x += velocidadX;
+                    y += velocidadY;
+                    confeti.style.left = x + 'px';
+                    confeti.style.top = y + 'px';
+                    confeti.style.opacity = 1 - (y / window.innerHeight);
+                    
+                    if (y > window.innerHeight) {
+                        clearInterval(animarConfeti);
+                        confeti.remove();
+                    }
+                }, 30);
+                
+                document.body.appendChild(confeti);
+            }
+        }
+
+        function touchStart() {
+            moverBoton();
         }
 
         function moverBoton() {
@@ -115,7 +177,7 @@
         function aceptar() {
             document.getElementById('pregunta').innerText = ">>> GRACIAADDD TE ADOROO <<<";
             
-            document.getElementById('subtexto').innerText = "(JIJIJIJA)";
+            document.getElementById('subtexto').innerText = "JIJIJIJA";
             
             document.getElementById('gif').src = "https://i.pinimg.com/originals/a7/5a/59/a75a59b1116cc8282873254511f57286.gif";
             
@@ -126,13 +188,21 @@
             yesBtn.style.backgroundColor = "#00ff00"; 
             yesBtn.style.color = "black";
             yesBtn.disabled = true;
+
+            document.getElementById('musicContainer').style.display = 'block';
+            
+            // Crear confeti especial al aceptar
+            crearConfeti();
             
             console.log("Misión cumplida. Soldado caído... en el amor.");
-            alert("YEEEEI DIJISTE QUE SISSIIII GRACIAS (no hay vuelta atras...)");
+            alert("OKEEIID YEEEEI DIJISTE QUE SISSIIII GRACIAS (no hay vuelta atras...)");
         }
     </script>
 
-</body>
+    <div id="musicContainer" style="display: none;">
+        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/2tduEXEDoqU3dkC4GdA93D?utm_source=generator&t=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+    </div>
 
+</body>
 </html>
 
