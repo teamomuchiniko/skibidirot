@@ -95,26 +95,133 @@
 
         #musicContainer {
             display: none;
-            margin-top: 50px;
-            text-align: center;
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 2px solid #ff0000;
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 350px;
+            z-index: 1001;
+            background: rgb(252, 69, 69);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
         }
 
         #secreto {
             display: none;
             margin-top: 80px;
-            padding: 20px;
-            font-size: 0.9em;
-            color: rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            font-size: 1em;
+            color: rgb(255, 84, 84);
             transition: all 0.3s;
-            cursor: pointer;
             user-select: none;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+            text-align: left;
+            border: 3px solid rgb(0, 0, 0);
+            background: rgba(255, 255, 255, 0.9);
+            font-family: 'Arial', sans-serif;
         }
 
         #secreto:hover {
-            color: rgba(255, 20, 147, 0.8);
-            text-shadow: 0 0 10px rgba(255, 20, 147, 0.5);
+            box-shadow: 0 0 20px rgba(255, 20, 39, 0.4);
+            border-color: rgb(255, 0, 0);
+        }
+        #carta {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 600px;
+            background: linear-gradient(135deg, #fff8f0 0%, #fffef5 100%);
+            border: 8px solid #8B4513;
+            border-radius: 5px;
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            padding: 50px 40px;
+            z-index: 1000;
+            animation: abrirCarta 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+            max-height: 85vh;
+            overflow-y: auto;
+            perspective: 1200px;
         }
 
+        @keyframes abrirCarta {
+            0% {
+                transform: translate(-50%, -50%) rotateX(90deg);
+                opacity: 0;
+            }
+            50% {
+                transform: translate(-50%, -50%) rotateX(45deg);
+            }
+            100% {
+                transform: translate(-50%, -50%) rotateX(0deg);
+                opacity: 1;
+            }
+        }
+
+        @keyframes abrirSolapa {
+            0% {
+                transform: rotateX(0deg);
+                opacity: 0;
+            }
+            100% {
+                transform: rotateX(-90deg);
+                opacity: 1;
+            }
+        }
+
+        #carta::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: 0;
+            right: 0;
+            height: 15px;
+            background: linear-gradient(to bottom, #D2691E, #8B4513);
+            border-radius: 3px 3px 0 0;
+        }
+
+        #cartaContenido {
+            color: #333;
+            font-family: 'Georgia', serif;
+            font-size: 1.05em;
+            line-height: 2;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        #cartaTitulo {
+            font-size: 1.8em;
+            color: rgb(255, 20, 147);
+            font-weight: bold;
+            margin-bottom: 30px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .fondo-oscuro {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        .fondo-oscuro.activo {
+            display: block;
+        }
         .mensaje-secreto {
             display: none;
             position: fixed;
@@ -127,14 +234,30 @@
         }
 
         .mensaje-secreto.revelado {
-            color: rgba(255, 20, 147, 1);
-            text-shadow: 0 0 15px rgba(255, 20, 147, 0.8);
+            color: rgb(255, 255, 255);
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
             font-size: 0.95em;
             pointer-events: auto;
         }
     </style>
 </head>
 <body>
+    <div class="fondo-oscuro"></div>
+
+    <div id="carta">
+        <div id="cartaTitulo">>>> GRACIAADDD TE ADOROO <<<</div>
+        <div id="cartaContenido">
+desde q te conoci algo cambio en mi no es esa cosa exagerada de las peliculas es mas real q eso. es despertarme pensando en vos es querer compartir cada cosa q me pasa es esa risa tuya q me vuelve loco.
+
+no necesito un futuro perfecto para saber q vos sos lo q necesito ahora. cada momento contigo aunq sea un rato viendo nada en el cel es mejor q mil cosas sin vos.
+
+sos mi favorita mi confidente mi compañera y aunq tenemos toda la vida x delante quiero q sea contigo.
+
+te amo mas d lo q puedo explicar.
+
+siempre tuyo.
+        </div>
+    </div>
 
     <div class="container">
         <img id="gif" src="https://i.pinimg.com/originals/b9/47/96/b947963868603abcfa888e6581e97fe2.gif" alt="Hello Kitty Emo">
@@ -209,66 +332,34 @@
         }
 
         function aceptar() {
-            document.getElementById('pregunta').innerText = ">>> GRACIAADDD TE ADOROO <<<";
+            // Ocultar el container original
+            document.querySelector('.container').style.display = 'none';
             
-            document.getElementById('subtexto').innerText = "JIJIJIJA";
-            
-            document.getElementById('gif').src = "https://i.pinimg.com/originals/a7/5a/59/a75a59b1116cc8282873254511f57286.gif";
-            
-            document.getElementById('noBtn').style.display = 'none';
-            
-            const yesBtn = document.getElementById('yesBtn');
-            yesBtn.innerText = "TE AMO MUCHII";
-            yesBtn.style.backgroundColor = "#00ff00"; 
-            yesBtn.style.color = "black";
-            yesBtn.disabled = true;
-
+            // Mostrar fondo oscuro y carta
+            document.querySelector('.fondo-oscuro').classList.add('activo');
+            document.getElementById('carta').style.display = 'block';
             document.getElementById('musicContainer').style.display = 'block';
-            
-            // Mostrar el secreto
-            document.getElementById('secreto').style.display = 'block';
             
             // Crear confeti especial al aceptar
             crearConfeti();
+            
+            // Auto-reproducir música
+            const iframe = document.querySelector('#musicContainer iframe');
+            if (iframe) {
+                iframe.src = iframe.src + '&utm_source=generator&t=0';
+            }
             
             console.log("Misión cumplida. Soldado caído... en el amor.");
             alert("OKEEIID YEEEEI DIJISTE QUE SISSIIII GRACIAS (no hay vuelta atras...)");
         }
 
         function revelarSecreto() {
-            const secreto = document.getElementById('secreto');
-            secreto.classList.add('revelado');
-            
-            // Revelar todos los mensajes secretos
-            const mensajesSecretos = document.querySelectorAll('.mensaje-secreto');
-            mensajesSecretos.forEach(mensaje => {
-                mensaje.classList.add('revelado');
-            });
+            // La carta ya es visible, esta función no hace nada
         }
     </script>
 
-    <div id="musicContainer" style="display: none;">
-        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/2tduEXEDoqU3dkC4GdA93D?utm_source=generator&t=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
-    </div>
-
-    <div id="secreto" onclick="revelarSecreto()" ontouchend="revelarSecreto()">
-        te amo mas de lo que crees
-    </div>
-
-    <div class="mensaje-secreto" style="top: 100px; left: 20px;" onclick="revelarSecreto()" ontouchend="revelarSecreto()">
-        eres mi favorita
-    </div>
-
-    <div class="mensaje-secreto" style="top: 250px; right: 15px;" onclick="revelarSecreto()" ontouchend="revelarSecreto()">
-        siempre pienso en ti
-    </div>
-
-    <div class="mensaje-secreto" style="bottom: 200px; left: 30px;" onclick="revelarSecreto()" ontouchend="revelarSecreto()">
-        mi corazon es tuyo
-    </div>
-
-    <div class="mensaje-secreto" style="bottom: 120px; right: 25px;" onclick="revelarSecreto()" ontouchend="revelarSecreto()">
-        eres lo mejor que me paso
+    <div id="musicContainer">
+        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/48A0pIzaYUiYQmIa5wXTea?utm_source=generator&t=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture; web-share"></iframe>
     </div>
 
 </body>
