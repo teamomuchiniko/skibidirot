@@ -98,6 +98,40 @@
             margin-top: 50px;
             text-align: center;
         }
+
+        #secreto {
+            display: none;
+            margin-top: 80px;
+            padding: 20px;
+            font-size: 0.9em;
+            color: rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        #secreto:hover {
+            color: rgba(255, 20, 147, 0.8);
+            text-shadow: 0 0 10px rgba(255, 20, 147, 0.5);
+        }
+
+        .mensaje-secreto {
+            display: none;
+            position: fixed;
+            font-size: 0.85em;
+            color: rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+            user-select: none;
+            pointer-events: none;
+        }
+
+        .mensaje-secreto.revelado {
+            color: rgba(255, 20, 147, 1);
+            text-shadow: 0 0 15px rgba(255, 20, 147, 0.8);
+            font-size: 0.95em;
+            pointer-events: auto;
+        }
     </style>
 </head>
 <body>
@@ -105,7 +139,7 @@
     <div class="container">
         <img id="gif" src="https://i.pinimg.com/originals/b9/47/96/b947963868603abcfa888e6581e97fe2.gif" alt="Hello Kitty Emo">
         
-        <h1 id="pregunta">umh olad nikolin bonita linda y jot quieres ser mi san valentin???</h1>
+        <h1 id="pregunta">umh olad nikolin bonita linda y jot quieres ser mi san valentin??</h1>
         
         <p id="subtexto">(jijijija)</p>
         
@@ -191,11 +225,25 @@
 
             document.getElementById('musicContainer').style.display = 'block';
             
+            // Mostrar el secreto
+            document.getElementById('secreto').style.display = 'block';
+            
             // Crear confeti especial al aceptar
             crearConfeti();
             
             console.log("Misión cumplida. Soldado caído... en el amor.");
             alert("OKEEIID YEEEEI DIJISTE QUE SISSIIII GRACIAS (no hay vuelta atras...)");
+        }
+
+        function revelarSecreto() {
+            const secreto = document.getElementById('secreto');
+            secreto.classList.add('revelado');
+            
+            // Revelar todos los mensajes secretos
+            const mensajesSecretos = document.querySelectorAll('.mensaje-secreto');
+            mensajesSecretos.forEach(mensaje => {
+                mensaje.classList.add('revelado');
+            });
         }
     </script>
 
@@ -203,7 +251,25 @@
         <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/2tduEXEDoqU3dkC4GdA93D?utm_source=generator&t=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
     </div>
 
+    <div id="secreto" onclick="revelarSecreto()" ontouchend="revelarSecreto()">
+        te amo mas de lo que crees
+    </div>
+
+    <div class="mensaje-secreto" style="top: 100px; left: 20px;" onclick="revelarSecreto()" ontouchend="revelarSecreto()">
+        eres mi favorita
+    </div>
+
+    <div class="mensaje-secreto" style="top: 250px; right: 15px;" onclick="revelarSecreto()" ontouchend="revelarSecreto()">
+        siempre pienso en ti
+    </div>
+
+    <div class="mensaje-secreto" style="bottom: 200px; left: 30px;" onclick="revelarSecreto()" ontouchend="revelarSecreto()">
+        mi corazon es tuyo
+    </div>
+
+    <div class="mensaje-secreto" style="bottom: 120px; right: 25px;" onclick="revelarSecreto()" ontouchend="revelarSecreto()">
+        eres lo mejor que me paso
+    </div>
+
 </body>
 </html>
-
-
