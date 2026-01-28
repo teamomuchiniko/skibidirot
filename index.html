@@ -97,6 +97,7 @@
             display: none;
             margin-top: 30px;
             padding-top: 30px;
+            border-top: 2px solid #ff0000;
             position: fixed;
             bottom: 20px;
             left: 50%;
@@ -246,15 +247,15 @@
     <div id="carta">
         <div id="cartaTitulo">>>> GRACIAADDD TE ADOROO <<<</div>
         <div id="cartaContenido">
-desde qui te conoci algo cambio en mi no es esa cosa exagerada de las peliculas es mas real que eso es despertarme pensando en ti es querer compartir cada cosa que me pasa es esa risita tuya quw me vuelve loco
+desde q te conoci algo cambio en mi no es esa cosa exagerada de las peliculas es mas real q eso. es despertarme pensando en vos es querer compartir cada cosa q me pasa es esa risa tuya q me vuelve loco.
 
-no necesito pensar en un futuro perfecto para saber qui tu eres lo q necesito y estoy seguro que todo sera perfecto contigo cada momento contigo aunqui sea un ratito hablando o por lo menos chateando es mejor q mil cosas sin ti
+no necesito un futuro perfecto para saber q vos sos lo q necesito ahora. cada momento contigo aunq sea un rato viendo nada en el cel es mejor q mil cosas sin vos.
 
-eres mi amorcito eres a quien quiero has sido mi compañera muchi tiempo y aunquw tenemos toda una vida por delante quiero q sea contigo con quien la viva
+sos mi favorita mi confidente mi compañera y aunq tenemos toda la vida x delante quiero q sea contigo.
 
-te amo mas d lo q puedo explicar
+te amo mas d lo q puedo explicar.
 
-siempre sere solo tuyo
+siempre tuyo.
         </div>
     </div>
 
@@ -272,6 +273,52 @@ siempre sere solo tuyo
     </div>
 
     <script>
+        // Función para crear corazones al cargar la página
+        function crearCorazones() {
+            const colores = ['#ff1493', '#ff69b4', '#ffb6c1', '#ff0000', '#ff69b4'];
+            for (let i = 0; i < 50; i++) {
+                const corazon = document.createElement('div');
+                corazon.textContent = '❤️';
+                corazon.style.position = 'fixed';
+                corazon.style.fontSize = (Math.random() * 25 + 25) + 'px';
+                corazon.style.left = window.innerWidth / 2 + 'px';
+                corazon.style.top = window.innerHeight / 2 + 'px';
+                corazon.style.pointerEvents = 'none';
+                corazon.style.zIndex = 998;
+                corazon.style.opacity = '1';
+                corazon.style.userSelect = 'none';
+                
+                const velocidadX = (Math.random() - 0.5) * 25;
+                const velocidadY = (Math.random() - 0.5) * 25;
+                const rotacion = Math.random() * 360;
+                let x = window.innerWidth / 2;
+                let y = window.innerHeight / 2;
+                let rotation = 0;
+                
+                const animarCorazon = setInterval(() => {
+                    x += velocidadX;
+                    y += velocidadY;
+                    rotation += 15;
+                    corazon.style.left = x + 'px';
+                    corazon.style.top = y + 'px';
+                    corazon.style.transform = `rotate(${rotation}deg)`;
+                    
+                    const distancia = Math.sqrt(
+                        Math.pow(x - window.innerWidth / 2, 2) + 
+                        Math.pow(y - window.innerHeight / 2, 2)
+                    );
+                    corazon.style.opacity = Math.max(0, 1 - (distancia / 600));
+                    
+                    if (distancia > 900) {
+                        clearInterval(animarCorazon);
+                        corazon.remove();
+                    }
+                }, 12);
+                
+                document.body.appendChild(corazon);
+            }
+        }
+
         // Función para confeti al aceptar
         function crearConfeti() {
             const colores = ['#ff1493', '#ff69b4', '#ffb6c1', '#ffc0cb', '#ff0000'];
@@ -361,7 +408,12 @@ siempre sere solo tuyo
         <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/48A0pIzaYUiYQmIa5wXTea?utm_source=generator&t=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture; web-share"></iframe>
     </div>
 
+    <script>
+        // Ejecutar la explosión de corazones al cargar la página
+        window.addEventListener('load', function() {
+            crearCorazones();
+        });
+    </script>
+
 </body>
 </html>
-
-
