@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hola mira esta cosa rapido niko oh si niko mueve ese gyatt yeaaaah</title>
+    <style>
+        body {
+            background-color: #72429e; 
+            font-family: monospace; 
+            text-align: center;
+            padding: 20px;
+            cursor: help;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border: 5px dashed black; 
+            box-shadow: 15px 15px 0px black;
+            max-width: 400px;
+            margin: 50px auto; 
+        }
+
+        h1 {
+            color: black;
+            text-decoration: underline;
+            font-size: 2em;
+            transform: rotate(-2deg); 
+        }
+
+        img {
+            width: 200px;
+            height: auto;
+            border: 3px solid black; 
+        }
+
+        .buttons {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 20px; 
+        }
+
+        .btn {
+            padding: 15px 30px;
+            font-size: 20px;
+            font-family: monospace;
+            font-weight: bold;
+            cursor: pointer;
+            border: 4px solid black;
+            border-radius: 0px !important; 
+            transition: none; 
+        }
+
+        #yesBtn {
+            background-color: rgb(250, 134, 183);
+            color: rgb(130, 74, 163);
+            font-size: 24px; 
+        }
+
+        #yesBtn:active {
+            background-color: black;
+            color: rgb(234, 0, 255);
+        }
+
+        #noBtn {
+            background-color: #ccc; 
+            color: black;
+            position: relative; 
+        }
+        
+        #subtexto {
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <img id="gif" src="https://i.pinimg.com/originals/b9/47/96/b947963868603abcfa888e6581e97fe2.gif" alt="Hello Kitty Emo">
+        
+        <h1 id="pregunta">umh quieres ser mi san valentin bebita bonita??</h1>
+        
+        <p id="subtexto">(jijijija)</p>
+        
+        <div class="buttons">
+            <button id="yesBtn" class="btn" onclick="aceptar()">[ SÍ, OVIAMNTE ]</button>
+            <button id="noBtn" class="btn" onmouseover="moverBoton()" onclick="touchStart()">[ No ]</button>
+        </div>
+    </div>
+
+    <script>
+         function touchStart() {
+             moverBoton();
+        }
+
+        function moverBoton() {
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            
+            const newLeft = Math.random() * (width - 200);
+            const newTop = Math.random() * (height - 200);
+
+            const btn = document.getElementById('noBtn');
+            btn.style.position = "fixed";
+            btn.style.left = newLeft + "px";
+            btn.style.top = newTop + "px";
+            
+            btn.style.backgroundColor = "black";
+            btn.style.color = "white";
+            btn.innerText = "[ umh??? ]";
+        }
+
+        function aceptar() {
+            document.getElementById('pregunta').innerText = ">>> GRACIAADDD TE ADOROO <<<";
+            
+            document.getElementById('subtexto').innerText = "(JIJIJIJA)";
+            
+            document.getElementById('gif').src = "https://i.pinimg.com/originals/a7/5a/59/a75a59b1116cc8282873254511f57286.gif";
+            
+            document.getElementById('noBtn').style.display = 'none';
+            
+            const yesBtn = document.getElementById('yesBtn');
+            yesBtn.innerText = "TE AMO MUCHII";
+            yesBtn.style.backgroundColor = "#00ff00"; 
+            yesBtn.style.color = "black";
+            yesBtn.disabled = true;
+            
+            console.log("Misión cumplida. Soldado caído... en el amor.");
+            alert("OKEEIID YEEEEI DIJISTE QUE SISSIIII GRACIAS (no hay vuelta atras...)");
+        }
+    </script>
+
+</body>
+</html>
